@@ -29,6 +29,8 @@ fn main() {
     println!("This struct `{:?}` won't print...", Structrue(67));
 
     debug();
+
+    display();
 }
 
 ///调试
@@ -61,6 +63,46 @@ fn debug() {
 
 //导入fmt模块
 use std::fmt;
+
+#[derive(Debug)]
+struct MinMax(i64, i64);
+
+
+//为类型实现fmt::Display trait 
+impl fmt::Display for MinMax {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "({}, {})", self.0, self.1)
+    } 
+}
+
+#[derive(Debug)]
+struct Point{
+    x: f64,
+    y: f64,
+}
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "x: {}, y: {}", self.x, self.y)
+    }
+}
+
 fn display() {
 
+    let minmax = MinMax(6, 7);
+    println!("Compare structures:");
+    println!("Display: {}", minmax);
+    println!("Debug: {:?}", minmax);
+
+
+    let big = MinMax(200, 233);
+    let small = MinMax(400, 788);
+    println!("The big range is {big} and the small is {small}", small=small, big = big);
+    let point = Point{
+        x: 6.7,
+        y: 5.7,
+    };
+
+    println!("Compare points:");
+    println!("Display: {}", point);
+    println!("Debug: {:?}", point);
 }
