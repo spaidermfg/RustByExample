@@ -2,12 +2,15 @@
 ///自定义类型：struct and enum      
 ///结构体   
 ///元组结构体：具名元组； C 结构体； 单元结构体，常用于泛型中       
-///
+///枚举
+///允许创建一个从数个不同取值中选其一的枚举类型
 fn main() {
     
     println!("Hello, world!");
 
     structs();
+
+    use_inspect();
 }
 
 #[derive(Debug)]
@@ -29,7 +32,7 @@ struct Point {
 }
 
 //结构体嵌套,作为另一个结构体的字段
-#[allow(dead_code)]
+#[allow(dead_code)] // 该属性隐藏对未使用代码的警告
 struct Rectangle {
     top_left: Point,
     bottom_right: Point,
@@ -103,3 +106,64 @@ fn square(point: Point, f: f32) -> Rectangle {
     }
     
 }
+
+
+///枚举类型
+///定义一个枚举类型
+enum WebEvenet {
+    PageLoad,
+    PageUnload,
+    KeyPress(char),
+    Paste(String),
+    Click{x: i64, y:i64}
+}
+
+///使用enum作为函数参数
+fn inspect(event: WebEvenet) {
+    match event {
+        WebEvenet::PageLoad => println!("page loaded"),
+        WebEvenet::PageUnload => println!("page unloaded"),
+        WebEvenet::Paste(s) => println!("pasted: {}", s),
+        WebEvenet::KeyPress(c) => println!("user pressed '{}'",c ),
+        WebEvenet::Click { x, y } => {
+            println!("clicked at x = {}, y = {}", x, y);
+        },
+    }
+}
+
+
+fn use_inspect() {
+    let pressed = WebEvenet::KeyPress('a');
+    let paste = WebEvenet::Paste('u'.to_string().to_owned());
+    let click = WebEvenet::Click { x: 88, y: 99 };
+    let load = WebEvenet::PageLoad;
+    let unload = WebEvenet::PageUnload;
+
+    inspect(pressed);
+    inspect(paste);
+    inspect(click);
+    inspect(load);
+    inspect(unload);
+
+    //使用use关键字
+    //无需指定完整路径名
+    
+    use WebEvenet::*;
+
+    //等价于 WebEvenet::PageLoad;
+    let _loaded = PageLoad;
+    let press = KeyPress('s');
+
+    //未使用完整路径
+    match press {
+        PageLoad => println!("page loaded"),
+        KeyPress(s) => println!("second user press {}", s),
+        PageUnload => println!("page unload second"),
+        Paste(a) => println!("paste the {}", a),
+        Click { x, y } => {
+            println!("she click the x = {} , y ={}", x, y);
+        },
+    };
+}
+
+
