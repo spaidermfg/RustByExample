@@ -5,6 +5,7 @@
 ///     嵌套循环需要使用标签来声明内外层循环
 ///     将操作值放在break之后，即可被返回
 /// while条件循环，当条件满足时循环
+/// match匹配，类似switch，比对每一个分支
 fn main() {
     println!("Hello, world!");
 
@@ -15,6 +16,8 @@ fn main() {
     whiles();
 
     fors();
+
+    matchs();
 }
 
 
@@ -159,3 +162,25 @@ fn fors() {
         }
     }
 }
+
+
+fn matchs() {
+
+    let num = 67;
+    println!("Tell me about {}", num);
+    match num {
+        1 => println!("One"),
+        2 | 3 | 4 | 5 | 11 => println!("This is a prime"),
+        12..=19 => println!("A teen"),
+        _ => println!("Ain't special"),
+    }
+
+
+    let flag = true;
+    let binary = match flag {
+        false => 0,
+        true => 1,
+    };
+    println!("{} -> {}", flag, binary);
+}
+
