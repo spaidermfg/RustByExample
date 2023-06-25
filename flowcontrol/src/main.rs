@@ -13,6 +13,8 @@ fn main() {
     loops();
 
     whiles();
+
+    fors();
 }
 
 
@@ -109,5 +111,51 @@ fn whiles() {
         }
 
         n += 1;
+    }
+}
+
+fn fors() {
+    //遍历区间
+    //for n in 1..=100 
+    for n in 1..101 {
+        if n % 15 == 0 {
+            println!("fizzbuzz");
+        } else if n % 3 == 0 {
+            println!("fizz");
+        } else if n % 5 == 0 {
+            println!("buzz");
+        } else {
+            println!("{}", n);
+        }
+    }
+
+
+    //遍历迭代器
+    //需要先将集合转化为一个迭代器
+    //iter：每次迭代中借用集合中的一个元素，集合本身不会被改变，循环之后仍然可以使用。
+    //into_iter: 会消耗集合， 循环之后集合无法再使用
+    //iter_mut: 可变的借用集合中的每个元素，允许集合被就地修改
+    let mut names = vec!["Bob", "Frank", "Ferris"];
+
+    for name in names.iter() {
+        match name {
+        &"Ferris" => println!("There is a rustacean among us!"),
+        _ => println!("hello {}", name),
+        }
+    }
+
+    for name in names.iter_mut() {
+        *name = match name {
+            &mut "Ferris" => "There is a rustacean among us!",
+            _ => "Hello",
+        }
+    }
+    println!("names: {:?}", names);
+
+    for name in names.into_iter() {
+        match name {
+            "Ferris" => println!("There is a rustacean among us!"),
+            _ => println!("hello {}", name),
+        }
     }
 }
