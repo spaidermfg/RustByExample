@@ -8,6 +8,7 @@ use std::future::PollFn;
 ///     将操作值放在break之后，即可被返回
 /// while条件循环，当条件满足时循环
 /// match匹配，类似switch，比对每一个分支
+/// 指针解引用用*，解构用&，ref，ref mut, 可以使用ref创建引用 
 fn main() {
     println!("Hello, world!");
 
@@ -22,6 +23,8 @@ fn main() {
     matchs();
 
     match_deconstruction();
+
+    point_deconstruction();
 }
 
 
@@ -212,7 +215,15 @@ fn match_deconstruction() {
         HSL(h,s ,l ) => println!("h: {}, s: {}, l: {}", h,s,l),
         CMY(c,m ,y ) => println!("c: {}, m: {}, y: {}", c,m,y),
     }
-    
+}
+
+//指针解构和解引用
+fn point_deconstruction() {
+    let reference = &67;
+
+    match reference {
+        &val => println!("Got a value via destructuring: {:?}", val),
+    }
 }
 
 #[allow(dead_code)]
@@ -224,3 +235,5 @@ enum Color {
     HSL(u32,u32,u32),
     CMY(u32,u32,u32),
 }
+
+
