@@ -219,10 +219,39 @@ fn match_deconstruction() {
 
 //指针解构和解引用
 fn point_deconstruction() {
+    //创建一个i32类型的引用
     let reference = &67;
 
     match reference {
+        //使用&匹配引用
         &val => println!("Got a value via destructuring: {:?}", val),
+    }
+
+    //解引用
+    match *reference {
+        val => println!("Got a value via defeferencing: {:?}", val),
+    }
+
+    //无引用
+    let _not_a_reference = 4;
+    //使用ref创建引用
+    let ref _is_a_reference = 8;
+
+    let value = 9;
+    let mut mut_value = 6;
+
+    match value {
+        //使用ref创建引用
+        ref r => println!("Got a reference to a value: {:?}", r),
+    }
+
+    match mut_value {
+        //ref获得引用
+        ref mut m => {
+            //*解引用后改变变量值
+            *m += 10;
+            println!("Got a mut value add 10 is : {:?}", m);
+        },
     }
 }
 
