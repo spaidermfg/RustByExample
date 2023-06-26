@@ -18,6 +18,8 @@ fn main() {
     fors();
 
     matchs();
+
+    match_deconstruction();
 }
 
 
@@ -184,3 +186,17 @@ fn matchs() {
     println!("{} -> {}", flag, binary);
 }
 
+//解构
+fn match_deconstruction() {
+    //解构元组
+    let triple = (2,3,4);
+    println!("Tell me about {:?}", triple);
+
+    match triple {
+        (2, x, y) => println!("First is `2`, x = {:?}, y = {:?}", x, y),
+        (1, ..) => println!("First is `1`, and the rest doesn't matter，..表示忽略元组的其余部分"),
+        _ => println!("表示不将值绑定到变量")
+        
+    }
+
+}
