@@ -1,3 +1,5 @@
+use std::future::PollFn;
+
 #[allow(unreachable_code)]
 /// # 流程控制
 /// ifelse后条件无需小括号
@@ -199,4 +201,26 @@ fn match_deconstruction() {
         
     }
 
+    //解构枚举
+    use Color::*;
+    let color = RGB(2,4, 6 );
+    match color {
+        Red => println!("The color is red."),
+        Blue => println!("The color is blue."),
+        Green => println!("The color is Green"),
+        RGB(x,y ,z ) => println!("Red: {}, Blue: {}, Green: {}", x, y,z),
+        HSL(h,s ,l ) => println!("h: {}, s: {}, l: {}", h,s,l),
+        CMY(c,m ,y ) => println!("c: {}, m: {}, y: {}", c,m,y),
+    }
+    
+}
+
+#[allow(dead_code)]
+enum Color {
+    Red,
+    Blue,
+    Green,
+    RGB(u32, u32, u32),
+    HSL(u32,u32,u32),
+    CMY(u32,u32,u32),
 }
