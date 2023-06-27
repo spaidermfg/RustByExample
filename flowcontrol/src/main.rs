@@ -191,6 +191,18 @@ fn matchs() {
         true => 1,
     };
     println!("{} -> {}", flag, binary);
+
+
+    //卫语句 guard
+    let pair = (6, 7);
+    println!("Tell me about {:?}", pair);
+
+    match pair {
+        (x, y) if x == y => println!("x: {} = y: {}", x, y),
+        (x, y) if x + y == 13 => println!("x: {} + y: {} = {}", x, y, x + y),
+        (x, _) if x % 2 == 0 => println!("The first one is odd"),
+        _ => println!("No correlation..."), 
+    }
 }
 
 //解构
