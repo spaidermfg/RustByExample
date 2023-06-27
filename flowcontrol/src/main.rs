@@ -8,7 +8,8 @@ use std::future::PollFn;
 ///     将操作值放在break之后，即可被返回
 /// while条件循环，当条件满足时循环
 /// match匹配，类似switch，比对每一个分支
-/// 指针解引用用*，解构用&，ref，ref mut, 可以使用ref创建引用 
+///     在match中间接的访问一个变量，需要使用@进行重新绑定来在分支中再次使用
+/// 指针解引用用*，解构用&，ref，ref mut, 可以使用ref创建引用  
 fn main() {
     println!("Hello, world!");
 
@@ -201,8 +202,24 @@ fn matchs() {
         (x, y) if x == y => println!("x: {} = y: {}", x, y),
         (x, y) if x + y == 13 => println!("x: {} + y: {} = {}", x, y, x + y),
         (x, _) if x % 2 == 0 => println!("The first one is odd"),
-        _ => println!("No correlation..."), 
+        _ => println!("No correlation..."),
     }
+
+    //使用绑定
+    println!("Tell me what type of person you are.");
+    match age() {
+        0  => println!("I haven't celebrated my first  birthday yet."),
+        n @ 1..=12 => {
+            println!("I'm  a child of age {}",n)
+        },
+        n @ 13..=19 =>println!("I'm a teen of age {}", n),
+        n => println!("I'm a old person of age {}", n),
+    }
+
+}
+
+fn age() -> u32 {
+    17
 }
 
 //解构
