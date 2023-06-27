@@ -25,6 +25,8 @@ fn main() {
     match_deconstruction();
 
     point_deconstruction();
+
+    struct_deconstruction();
 }
 
 
@@ -265,4 +267,20 @@ enum Color {
     CMY(u32,u32,u32),
 }
 
+fn struct_deconstruction() {
+    struct Foo{ x: (u32, u32), y: u32}
 
+    //解构结构体
+    let foo = Foo { x: (1, 2), y : 3};
+    let Foo { x: (a, b), y } = foo;
+
+    println!("a = {}, b = {}, y = {}", a, b ,y );
+
+    //顺序不重要
+    let Foo {y: i, x : j} = foo;
+    println!("i: {:?}, j: {:?}", i, j);
+
+    //省略某些字段
+    let Foo {y, ..} = foo;
+    println!("y = {}", y);   
+}
