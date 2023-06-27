@@ -28,6 +28,8 @@ fn main() {
     point_deconstruction();
 
     struct_deconstruction();
+
+    if_let();
 }
 
 
@@ -312,4 +314,55 @@ fn struct_deconstruction() {
     //省略某些字段
     let Foo {y, ..} = foo;
     println!("y = {}", y);   
+}
+
+//一些使用match不方便的情况下使用if let
+fn if_let() {
+    let number = Some(7);
+    let letter: Option<i32> = None;
+    let emoticon: Option<i32> = None;
+
+    if let Some(i) = number {
+        println!("number is {:?}", i);
+    }
+
+    if let Some(i) = letter {
+        println!("letter is {:?}", i);        
+    } else {
+        println!("Don't match a letter. Let's go with a letter.")
+    }
+
+    let is_like_letters: bool = false;
+
+    if let Some(i) = emoticon {
+        println!("emotion is {:?}", i);
+    } else if is_like_letters {
+        println!("is like a letter.");
+    } else {
+        println!("Let's go with a emoticon.");
+    }
+    
+
+    //匹配枚举值
+    let bar = Tony::Bar;
+    let baz = Tony::Baz;
+    let qux = Tony::Qux(99);
+
+    if let Tony::Bar = bar {
+        println!("bar is tony bar");
+    }
+
+    if let Tony::Bar = baz {
+        println!("baz is tony bar");
+    }
+
+    if let Tony::Qux(i) = qux {
+        println!("qux is {}", i);
+    }
+}
+
+enum Tony {
+    Bar,
+    Baz,
+    Qux(u32), 
 }
