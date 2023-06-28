@@ -30,6 +30,8 @@ fn main() {
     struct_deconstruction();
 
     if_let();
+
+    while_let();
 }
 
 
@@ -365,4 +367,18 @@ enum Tony {
     Bar,
     Baz,
     Qux(u32), 
+}
+
+fn while_let() {
+    let mut optional = Some(0);
+
+    while let Some(i) = optional {
+        if i > 9 {
+            println!("Greater than 9, quit!");
+            optional = None;
+        } else {
+            println!("i is {:?}. Try again", i);
+            optional = Some(i * 2);
+        }
+    }
 }
