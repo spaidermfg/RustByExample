@@ -4,10 +4,17 @@
 /// self是self: Self的语法糖
 /// &mut self 是self: &mut Self的语法糖
 /// 静态方法使用::访问， 实例方法使用.访问
+/// ## 闭包closure
+/// 能够捕获周围作用域中变量的函数 |val| val + x
+/// 输入和返回类型都可以自动推导，但输入参数名必须指明.
+/// |val| 替代 （val） 
+///
 fn main() {
     println!("Hello, world!");
 
     use_method();
+
+    closure();
 }
 
 struct Point {
@@ -84,4 +91,14 @@ fn use_method() {
 
     let pair = Pair(Box::new(8), Box::new(8));
     pair.destroy();
+}
+
+
+fn closure() {
+    let closure_annotated = |i: i32| -> i32 {i + 1};
+    let closure_inferred = | i | {i + 1};
+
+    let i = 6;
+    println!("closure_annotated: {}", closure_annotated(i));
+    println!("closure_inferred: {}", closure_inferred(i));
 }
