@@ -93,7 +93,7 @@ fn use_method() {
     pair.destroy();
 }
 
-
+use std::mem;
 fn closure() {
     let closure_annotated = |i: i32| -> i32 {i + 1};
     let closure_inferred = | i | {i + 1};
@@ -101,4 +101,31 @@ fn closure() {
     let i = 6;
     println!("closure_annotated: {}", closure_annotated(i));
     println!("closure_inferred: {}", closure_inferred(i));
+
+
+    //通过引用&T捕获变量
+    let color = String::from("green");
+    let print = || println!("color: {}", color);
+
+    print();
+
+
+    //通过可变引用&mut T来捕获变量
+    let mut count = 0;
+
+    let mut inc = || {
+        count += 1;
+        println!("count: {}", count);
+    };
+
+    inc();
+    inc();
+
+    let movable = Box::new(4);
+    let consume = || {
+        println!("movabble: {:?}", movable);
+        mem::drop(movable);
+    };
+
+    consume();
 }
