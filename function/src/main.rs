@@ -12,6 +12,7 @@
 /// Fn表示捕获方式为通过引用的&T的闭包，FnMut表示捕获方式为通过可变引用&mut T的闭包
 /// FnOnce表示捕获方式为通过值为T的闭包
 /// 闭包作为参数时，要求闭包必须时泛型的
+/// 函数也可以作为函数参数，只要满足该闭包的trait约束即可
 fn main() {
     println!("Hello, world!");
 
@@ -157,6 +158,13 @@ fn closure() {
     let double = |x| x * 3;
 
     println!("double is {}", apply_to_3(double));
+
+
+    /* 函数作为参数 */
+    let doller = || println!("I'm they boss.");
+    call_me(doller);
+    call_me(function);
+
 }
 
 
@@ -171,5 +179,13 @@ fn apply_to_3<F>(f: F) -> i32 where
     F: Fn(i32) -> i32 {
 
     f(3)
+}
+
+fn call_me<F: Fn()>(f: F) {
+    f()
+}
+
+fn function() {
+    println!("I'm your boss.");
 }
 
