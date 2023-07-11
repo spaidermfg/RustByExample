@@ -8,7 +8,9 @@
 /// 能够捕获周围作用域中变量的函数 |val| val + x
 /// 输入和返回类型都可以自动推导，但输入参数名必须指明.
 /// |val| 替代 （val） 
-///
+/// ## 闭包可以作为参数
+/// Fn表示捕获方式为通过引用的&T的闭包，FnMut表示捕获方式为通过可变引用&mut T的闭包
+/// FnOnce表示捕获方式为通过值为T的闭包
 fn main() {
     println!("Hello, world!");
 
@@ -128,4 +130,45 @@ fn closure() {
     };
 
     consume();
+
+
+    /* 将闭包作为参数 */
+    let greeting = "hello";
+    //不可复制类型
+    //从借用的数据创建有所有权的数据
+    let mut farewall = "goodbye".to_owned();
+
+    let dairy = || {
+        //Fn 
+        println!("I said {}", greeting);
+
+        //FnMut
+        farewall.push_str("!!!!!");
+        println!("Then I screamed {}.", farewall);
+        println!("Now I can sleep. zzzzzzzzzzzzzz");
+
+        //FnOnce
+        mem::drop(farewall);
+    };
+
+    apply(dairy);
+
+    let double = |x| x * 3;
+
+    println!("double is {}", apply_to_3(double));
 }
+
+
+//将闭包作为参数并调用
+fn apply<F>(f: F) where 
+    F: FnOnce() {
+    f();
+}
+
+//将闭包作为参数并返回一个整型
+fn apply_to_3<F>(f: F) -> i32 where
+    F: Fn(i32) -> i32 {
+
+    f(3)
+}
+
