@@ -13,6 +13,8 @@
 /// FnOnce表示捕获方式为通过值为T的闭包
 /// 闭包作为参数时，要求闭包必须时泛型的
 /// 函数也可以作为函数参数，只要满足该闭包的trait约束即可
+/// ## 函数作为返回值
+/// rust目前只支持非泛型的返回值，只有使用impl trait才能返回一个闭包，并且返回值必须要声明闭包的有效特征
 fn main() {
     println!("Hello, world!");
 
@@ -165,6 +167,14 @@ fn closure() {
     call_me(doller);
     call_me(function);
 
+    /* 函数作为返回值 */
+    let fn_pain = create_fn();
+    let mut fnmut_pain = create_fnmut();
+    let fnonce_pain = create_fnonce();
+
+    fn_pain();
+    fnmut_pain();
+    fnonce_pain();
 }
 
 
@@ -189,3 +199,22 @@ fn function() {
     println!("I'm your boss.");
 }
 
+
+fn create_fn() -> impl Fn() {
+    let text = "Fn".to_owned();
+
+    move || println!("This is a: {}", text)
+}
+
+fn create_fnmut() -> impl FnMut() {
+    let text = "FnMut".to_owned();
+
+    move || println!("This is a: {}", text)
+}
+
+fn create_fnonce() -> impl FnOnce() {
+
+    let text = "FnOnce".to_owned();
+
+    move || println!("This is a: {}", text)
+}
