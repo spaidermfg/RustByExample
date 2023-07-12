@@ -175,6 +175,10 @@ fn closure() {
     fn_pain();
     fnmut_pain();
     fnonce_pain();
+
+
+    //Iterator::any
+    literator_any();
 }
 
 
@@ -217,4 +221,21 @@ fn create_fnonce() -> impl FnOnce() {
     let text = "FnOnce".to_owned();
 
     move || println!("This is a: {}", text)
+}
+
+
+fn literator_any() {
+    let vec1 = vec![1,2,3];
+    let vec2 = vec![4,5,6];
+
+    //对vec iter() 解构出&i32
+    println!("in vec1: {}", vec1.iter().any(|&x| x == 2));
+    //对vec into_iter()解构出i32
+    println!("in vec2: {}", vec2.into_iter().any(|x| x == 2));
+    
+    let array1 = [1,2,3];
+    let array2 = [4,5,6];
+
+    println!("in array1: {}", array1.iter().any(|&x| x == 4));
+    println!("in array2: {}", array2.into_iter().any(|x| x == 4));
 }
