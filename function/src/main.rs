@@ -179,6 +179,9 @@ fn closure() {
 
     //Iterator::any
     literator_any();
+
+    //Iterator::find
+    liteator_find();
 }
 
 
@@ -238,4 +241,23 @@ fn literator_any() {
 
     println!("in array1: {}", array1.iter().any(|&x| x == 4));
     println!("in array2: {}", array2.into_iter().any(|x| x == 4));
+}
+
+// 接收一个迭代器，返回option类型
+fn liteator_find() {
+    let vec1 = vec![1,2,3];
+    let vec2 = vec![4,5,6];
+    
+    let mut iter = vec1.iter();
+    let mut into_iter = vec2.into_iter();
+
+    //迭代器自身元素是&i32类型，将迭代器元素的引用传递给闭包，就是&&i32类型
+    println!("Find 2 in vec1: {:?}", iter.find(|&&x| x == 2));
+    println!("Find 2 in vec2: {:?}", into_iter.find(|&x| x == 2));
+
+    let array1 = [1,2,3];
+    let array2 = [4,5,6];
+
+    println!("Find 4 in array1: {:?}", array1.iter().find(|&&x| x == 4));
+    println!("Find 4 in array2: {:?}", array2.into_iter().find(|&x| x == 4));
 }
