@@ -17,6 +17,9 @@
 /// rust目前只支持非泛型的返回值，只有使用impl trait才能返回一个闭包，并且返回值必须要声明闭包的有效特征
 /// ## 高阶函数High\er Order function
 /// 输入一个或多个函数，产生一个更有用的函数的函数
+/// ## 发散函数 diverging function 
+/// 永远不回返回，使用!来进行标记，与()不同，后者会照常返回
+/// 优点是可以被转换为任何类型
 fn main() {
     println!("Hello, world!");
 
@@ -101,6 +104,7 @@ fn use_method() {
     pair.destroy();
 }
 
+use core::panicking::panic;
 use std::mem;
 fn closure() {
     let closure_annotated = |i: i32| -> i32 {i + 1};
@@ -188,6 +192,9 @@ fn closure() {
 
     //高阶函数
     higher_order();
+
+    //发散函数
+    diverging_fn();
 }
 
 
@@ -303,4 +310,15 @@ fn higher_order() {
             .fold(0, |sum, i| sum + i);   // 累加
 
     println!("functional style: {}", sum_of_squared_odd_numbers);
+}
+
+fn some_fn() {  
+    ()
+}
+
+fn diverging_fn() {
+    let a: () = some_fn();
+    println!("This function returns and you can see this line.");
+
+
 }
