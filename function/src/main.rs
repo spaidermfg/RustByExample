@@ -15,6 +15,8 @@
 /// 函数也可以作为函数参数，只要满足该闭包的trait约束即可
 /// ## 函数作为返回值
 /// rust目前只支持非泛型的返回值，只有使用impl trait才能返回一个闭包，并且返回值必须要声明闭包的有效特征
+/// ## 高阶函数High\er Order function
+/// 输入一个或多个函数，产生一个更有用的函数的函数
 fn main() {
     println!("Hello, world!");
 
@@ -182,6 +184,10 @@ fn closure() {
 
     //Iterator::find
     liteator_find();
+
+
+    //高阶函数
+    higher_order();
 }
 
 
@@ -260,4 +266,41 @@ fn liteator_find() {
 
     println!("Find 4 in array1: {:?}", array1.iter().find(|&&x| x == 4));
     println!("Find 4 in array2: {:?}", array2.into_iter().find(|&x| x == 4));
+}
+
+
+//记录奇数
+fn is_odd(n: u32) -> bool {
+    n % 2 == 1
+}
+
+
+fn higher_order() {
+    println!("Find the sum of all the squared odd numbers under 1000");
+    let upper = 1000;
+
+
+    //命令式编程
+    let mut acc = 0;
+    for n in 0.. {
+        let n_squared = n* n;
+
+        if n_squared >= upper {
+            break;
+        } else if is_odd(n) {
+            //统计奇数
+            acc += n_squared;
+        }
+    }
+
+    println!("imperative style: {}", acc);
+
+    //函数式写法
+    let sum_of_squared_odd_numbers: u32 = 
+        (0..).map(|n| n * n)     //取平方
+        .take_while(|&n| n < upper)  //取小于上限的
+            .filter(|&n| is_odd(n))  //取奇数
+            .fold(0, |sum, i| sum + i);   // 累加
+
+    println!("functional style: {}", sum_of_squared_odd_numbers);
 }
