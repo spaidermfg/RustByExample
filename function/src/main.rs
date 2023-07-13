@@ -104,7 +104,6 @@ fn use_method() {
     pair.destroy();
 }
 
-use core::panicking::panic;
 use std::mem;
 fn closure() {
     let closure_annotated = |i: i32| -> i32 {i + 1};
@@ -317,8 +316,21 @@ fn some_fn() {
 }
 
 fn diverging_fn() {
-    let a: () = some_fn();
+    let _a: () = some_fn();
     println!("This function returns and you can see this line.");
 
-
+    fn sum_odd_numbers(up_to: u32) -> u32 {
+        let mut acc = 0;
+        for i in 0..up_to {
+            let addition: u32 = match i % 2 == 1 {
+                true => i,
+                // continue 不返回u32
+                // 因为它永远不回返回
+                false => continue,
+            };
+            acc += addition;
+        }
+        acc
+    }
+    println!("Sum of odd numbers up to 9 (excluding): {}", sum_odd_numbers(1000));
 }
