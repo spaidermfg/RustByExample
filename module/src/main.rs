@@ -4,6 +4,9 @@
 /// 模块中拥有私有可见性和公有可见性
 fn main() {
     println!("Hello, world!");
+
+
+    
 }
 
 mod my_mod {
@@ -46,7 +49,22 @@ mod my_mod {
         pub(self) fn public_function_in_my_nested() {
             println!("called `my_mod::nested::public_function_in_my_nested()`");
         }
+
+        // 使用pub(super) 语法定义的函数只在父模块中可见
+        pub(super) fn public_function_in_super_mod() {
+            println!("called `my_mod::nested::public_function_in_super_mod()`");
+        }
+    }
+
+
+    pub fn call_public_function_in_my_mod() {
+        println!("called `my_mod::nested::call_public_function_in_my_mod()`, that > ");
+        nested::public_function_in_my_mod();
+        print!("> ");
+        nested::public_function_in_super_mod();
     }
 }
+
+
 
 
