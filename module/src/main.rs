@@ -4,20 +4,38 @@
 /// 模块中拥有私有可见性和公有可见性
 fn main() {
     println!("Hello, world!");
+    function();
+    
+    my_mod::function();
+    
+    //私有项不能直接访问
+    my_mod::indirect_access();
+    
+
+    my_mod::nested::function();
+
+
+    //可以在同一个crate的任何地方访问
+    my_mod::public_function_in_crate();
+    
+
+    my_mod::call_public_function_in_my_mod();
 
 
     
 }
 
-mod my_mod {
-    use std::thread::panicking;
+fn function() {
+    println!("this is a funcion not in mod inside.");
+}
 
+mod my_mod {
     fn private_fn() {
         println!("called `my_mod::private_fn()`");
     }
 
     //使用pub关键字改变默认可变性
-    pub fn pub_fn() {
+    pub fn function() {
         println!("called `my_mod::pub_fn()`");
     }
 
@@ -29,8 +47,9 @@ mod my_mod {
 
     // 模块也可以嵌套
     pub mod nested {
-       pub fn pub_fn() {
+       pub fn function() {
             println!("called `my_mod::nested::pub_fn()`");
+            private_fn();
        } 
     
 
@@ -62,6 +81,17 @@ mod my_mod {
         nested::public_function_in_my_mod();
         print!("> ");
         nested::public_function_in_super_mod();
+    }
+
+    // crate 使函数只在当前crate中可见
+    pub(crate) fn public_function_in_crate() {
+        println!("called `my_mod::public_function_in_crate`");
+    }
+
+    mod private_nested {
+        pub fn function() {
+            println!("called `my_mod::private_nested::function()`");
+        }
     }
 }
 
