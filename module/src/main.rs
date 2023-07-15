@@ -22,7 +22,17 @@ fn main() {
     my_mod::call_public_function_in_my_mod();
 
 
+    let open_source = my_struct::OpenSource{ contents: "Which one moment" };
+    println!("use public struct in mod: {}", open_source.contents);
     
+
+    //带有私有字段名的公有结构体不能通过字段名来构造
+
+
+    //带有私有字段的公有结构体可以通过公有的构造器来创建
+    let _closed_source = my_struct::ClosedSource::new("private contents");
+
+
 }
 
 fn function() {
@@ -96,5 +106,23 @@ mod my_mod {
 }
 
 
+/* 结构体的可见性 */
+mod my_struct  {
+    //一个公有的结构体带一个公有的字段
+    pub struct OpenSource<T> {
+        pub contents: T,
+    }
 
+    //一个公有的结构体带一个私有的字段
+    #[allow(dead_code)]
+    pub struct ClosedSource<T> {
+        contents: T,
+    }
 
+    impl<T> ClosedSource<T> {
+        //公有的构造方法
+        pub fn new(content: T) -> ClosedSource<T> {
+            ClosedSource { contents: content }
+        }
+    }
+}
