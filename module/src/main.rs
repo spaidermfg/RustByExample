@@ -42,8 +42,13 @@ fn main() {
 
 
     my::indirect_call();
+
+    myy::function();
+    myy::nested::function();
+    myy::indirect_access();
 }
 
+mod myy;
 use deeply::nested::function as other_function;
 
 fn function() {
