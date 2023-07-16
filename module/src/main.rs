@@ -2,6 +2,7 @@
 /// ## 可见性
 /// 模块中可以拥有很多项，函数、结构体、枚举、模块等，使用关键字pub来改变默认可见性
 /// 模块中拥有私有可见性和公有可见性
+/// use关键字将一个完整的路径绑定到一个新名字
 fn main() {
     println!("Hello, world!");
     function();
@@ -33,7 +34,20 @@ fn main() {
     let _closed_source = my_struct::ClosedSource::new("private contents");
 
 
+    
+    other_function(); 
+    println!("Entering block");
+{
+        use deeply::nested::function;
+        function();
+
+        println!("Leaving block");
+    }
+
+    function();
 }
+
+use deeply::nested::function as other_function;
 
 fn function() {
     println!("this is a funcion not in mod inside.");
@@ -123,6 +137,14 @@ mod my_struct  {
         //公有的构造方法
         pub fn new(content: T) -> ClosedSource<T> {
             ClosedSource { contents: content }
+        }
+    }
+}
+
+mod deeply {
+    pub mod nested {
+        pub fn function() {
+            println!("called `deeply::nested::function()`");
         }
     }
 }
