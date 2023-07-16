@@ -6,38 +6,32 @@
 fn main() {
     println!("Hello, world!");
     function();
-    
+
     my_mod::function();
-    
+
     //私有项不能直接访问
     my_mod::indirect_access();
-    
 
     my_mod::nested::function();
 
-
     //可以在同一个crate的任何地方访问
     my_mod::public_function_in_crate();
-    
 
     my_mod::call_public_function_in_my_mod();
 
-
-    let open_source = my_struct::OpenSource{ contents: "Which one moment" };
+    let open_source = my_struct::OpenSource {
+        contents: "Which one moment",
+    };
     println!("use public struct in mod: {}", open_source.contents);
-    
 
     //带有私有字段名的公有结构体不能通过字段名来构造
-
 
     //带有私有字段的公有结构体可以通过公有的构造器来创建
     let _closed_source = my_struct::ClosedSource::new("private contents");
 
-
-    
-    other_function(); 
+    other_function();
     println!("Entering block");
-{
+    {
         use deeply::nested::function;
         function();
 
@@ -45,6 +39,9 @@ fn main() {
     }
 
     function();
+
+
+    my::indirect_call();
 }
 
 use deeply::nested::function as other_function;
@@ -71,16 +68,15 @@ mod my_mod {
 
     // 模块也可以嵌套
     pub mod nested {
-       pub fn function() {
+        pub fn function() {
             println!("called `my_mod::nested::pub_fn()`");
             private_fn();
-       } 
-    
+        }
 
         fn private_fn() {
             println!("called `my_mod::nested::private_fn()`");
         }
-        
+
         // 使用pub(in path) 语法定义的函数只能在给定的路径中可见
         // path必须是父模块或祖先模块
         pub(in crate::my_mod) fn public_function_in_my_mod() {
@@ -98,7 +94,6 @@ mod my_mod {
             println!("called `my_mod::nested::public_function_in_super_mod()`");
         }
     }
-
 
     pub fn call_public_function_in_my_mod() {
         println!("called `my_mod::nested::call_public_function_in_my_mod()`, that > ");
@@ -119,9 +114,8 @@ mod my_mod {
     }
 }
 
-
 /* 结构体的可见性 */
-mod my_struct  {
+mod my_struct {
     //一个公有的结构体带一个公有的字段
     pub struct OpenSource<T> {
         pub contents: T,
@@ -145,6 +139,41 @@ mod deeply {
     pub mod nested {
         pub fn function() {
             println!("called `deeply::nested::function()`");
+        }
+    }
+}
+
+mod cool {
+    pub fn function() {
+        println!("called cool::function");
+    }
+}
+
+mod my {
+    fn function() {
+        println!("called my::function");
+    }
+
+    mod cool {
+        pub fn function() {
+            println!("called my::cool::function");
+        }
+    }
+
+    pub fn indirect_call() {
+        println!("called my::indirect_call");
+
+        //self表示当前模块中
+        self::function();
+        function();
+
+        self::cool::function();
+
+        //super表示父模块中
+        super::function();
+        {
+            use crate::cool::function as cool_function;
+            cool_function();
         }
     }
 }
