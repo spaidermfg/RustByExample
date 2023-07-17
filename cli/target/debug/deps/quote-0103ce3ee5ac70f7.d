@@ -1,0 +1,13 @@
+/Users/mac/myth/rustaceans/RustByExample/cli/target/debug/deps/quote-0103ce3ee5ac70f7.rmeta: /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/lib.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ext.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/format.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ident_fragment.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/to_tokens.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/runtime.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/spanned.rs
+
+/Users/mac/myth/rustaceans/RustByExample/cli/target/debug/deps/libquote-0103ce3ee5ac70f7.rlib: /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/lib.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ext.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/format.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ident_fragment.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/to_tokens.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/runtime.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/spanned.rs
+
+/Users/mac/myth/rustaceans/RustByExample/cli/target/debug/deps/quote-0103ce3ee5ac70f7.d: /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/lib.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ext.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/format.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ident_fragment.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/to_tokens.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/runtime.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/spanned.rs
+
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/lib.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ext.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/format.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/ident_fragment.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/to_tokens.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/runtime.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/quote-1.0.30/src/spanned.rs:

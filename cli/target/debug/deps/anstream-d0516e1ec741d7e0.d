@@ -1,0 +1,14 @@
+/Users/mac/myth/rustaceans/RustByExample/cli/target/debug/deps/anstream-d0516e1ec741d7e0.rmeta: /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/lib.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/mod.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/strip.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/wincon.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/buffer.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/macros.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/auto.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/lockable.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/raw.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/strip.rs
+
+/Users/mac/myth/rustaceans/RustByExample/cli/target/debug/deps/anstream-d0516e1ec741d7e0.d: /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/lib.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/mod.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/strip.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/wincon.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/buffer.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/macros.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/auto.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/lockable.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/raw.rs /Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/strip.rs
+
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/lib.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/mod.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/strip.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/adapter/wincon.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/buffer.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/macros.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/auto.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/lockable.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/raw.rs:
+/Users/mac/.cargo/registry/src/rsproxy.cn-0dccff568467c15b/anstream-0.3.2/src/strip.rs:
