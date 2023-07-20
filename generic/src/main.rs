@@ -1,4 +1,4 @@
-use std::fmt::Debug;
+use std::fmt::{Debug, Display};
 
 /// # 泛型
 /// 泛化类型和函数，减少重复代码
@@ -64,6 +64,15 @@ fn use_generic() {
 
     println!("{}", area(&rectangle));
 
+
+    //多重约束
+    let string = "words";
+    let array = [1, 2, 3];
+    let vec = vec![4, 5,6];
+
+    compare_prints(&string);
+
+    compare_types(&array, &vec);
 }
 
 
@@ -108,4 +117,15 @@ fn area<T: HasArea>(t: &T) -> f64 {
 //调用者必须实现Debug 
 fn print_debug<T: Debug>(t: &T) {
     println!("{:?}", t);
+}
+
+//关联约束，使用+号, 类型之间使用逗号分隔
+fn compare_prints<T: Debug + Display>(t: &T) {
+    println!("Debug: {:?}", t);
+    println!("Display: {}", t);
+}
+
+fn compare_types<T: Debug, U: Debug>(t: &T, u: &U) {
+    println!("t: {:?}", t);
+    println!("u: {:?}", u);
 }
