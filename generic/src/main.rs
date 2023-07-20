@@ -12,8 +12,30 @@ fn main() {
 //泛型结构体
 struct SGen<T>(T);
 
+struct Val {
+    val: f64,
+}
+
+struct GenVal<T> {
+    gen_val: T,
+}
+
 //接受一个泛型参数
 fn generic<T>(_s : SGen<T>) {}
+
+impl Val {
+    fn value(&self) -> &f64 {
+        &self.val
+    }
+}
+
+
+//实现泛型
+impl <T> GenVal<T> {
+    fn value(&self) -> &T {
+        &self.gen_val
+    }
+}
 
 //使用泛型函数
 fn use_generic() {
@@ -23,4 +45,7 @@ fn use_generic() {
     //隐式的指定类型参数
     generic(SGen(9));
     
+    let x = Val {val: 3.4};
+    let y = GenVal { gen_val: 67i32};
+    println!("{} {}", x.value(), y.value());
 }
