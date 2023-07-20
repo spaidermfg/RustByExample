@@ -48,4 +48,26 @@ fn use_generic() {
     let x = Val {val: 3.4};
     let y = GenVal { gen_val: 67i32};
     println!("{} {}", x.value(), y.value());
+    
+    //泛型trait 
+    let empty = Empty;
+    let null = Null;
+
+    //释放empty和null
+    empty.double_drop(null);
+}
+
+
+struct Empty;
+struct Null;
+
+//泛型trait
+trait DoubleDrop<T> {
+    fn double_drop(self, _: T);
+}
+
+
+//为T和U实现trait
+impl<T, U> DoubleDrop<T> for U {
+    fn double_drop(self, _: T) {}
 }
