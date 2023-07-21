@@ -145,13 +145,20 @@ fn compare_types<T: Debug, U: Debug>(t: &T, u: &U) {
 //关联项
 struct Container(i32, i32);
 
-trait Contains<A, B> {
-    fn contains(&self, _: &A, _: &B) -> bool;
+trait Contains {
+    //关联类型
+    type A;
+    type B;
+    
+    fn contains(&self, _: &Self::A, _: &Self::B) -> bool;
     fn first(&self) -> i32;
     fn last(&self) -> i32;
 }
 
-impl Contains<i32, i32> for Container {
+impl Contains for Container {
+    type A = i32;
+    type B = i32;
+    
     fn contains(&self, a: &i32, b: &i32) -> bool {
         (&self.0 == a) && (&self.1 == b)
     }
@@ -166,7 +173,13 @@ impl Contains<i32, i32> for Container {
 }
 
 //使用where子句
-fn difference<A, B, C>(container: &C) -> i32 where 
-    C: Contains<A, B> {
+//fn difference<A, B, C>(container: &C) -> i32 where 
+//    C: Contains<A, B> {
+//    container.last() - container.first()
+//}
+
+
+fn difference<C: Contains>(container: &C) -> i32 {
     container.last() - container.first()
 }
+
