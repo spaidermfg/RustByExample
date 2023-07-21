@@ -1,8 +1,11 @@
-use std::fmt::{Debug, Display};
+use std::{fmt::{Debug, Display}, marker::PhantomData};
+use std::ops::Add;
 
 /// # 泛型
 /// 泛化类型和函数，减少重复代码
 /// 泛型类型参数一般用<T>表示
+/// 虚类型参数
+/// 在运行时不存在，仅在编译时进行静态检查的类型参数，没有存储值，也没有运行时
 fn main() {
     
     println!("Hello, world!");
@@ -84,6 +87,17 @@ fn use_generic() {
     println!("Last num: {}", container.last());
 
     println!("the difference is: {}", difference(&container));
+    
+    //虚类型参数
+    let one: Length<Inch> = Length(34.0, PhantomData);
+    let doc: Length<Mm> = Length(99.3, PhantomData);
+
+    let neo = one + one;
+
+    let cod = doc + doc;
+
+    println!("{}", neo.0);
+    println!("{}", cod.0);
     
 }
 
@@ -183,3 +197,30 @@ fn difference<C: Contains>(container: &C) -> i32 {
     container.last() - container.first()
 }
 
+
+//虚类型参数实例
+#[derive(Debug, Clone, Copy)]
+enum Inch {}
+
+#[derive(Debug, Clone, Copy)]
+enum Mm{}
+
+#[derive(Debug, Clone, Copy)]
+struct Length<Unit>(f64, PhantomData<Unit>);
+
+//RHS 默认值为Self 
+//Self + RHS = Output
+//pub trait Add<RHS = Self> {
+//    type Output;
+//
+//    fn add(self, rhs: RHS) -> Self::Output;
+//}
+
+
+impl<Unit> Add for Length<Unit> {
+    type Output = Length<Unit>;
+
+    fn add(self, rhs: Self) -> Length<Unit> {
+        Length(self.0 + rhs.0, PhantomData)
+    }
+}
