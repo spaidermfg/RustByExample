@@ -73,6 +73,18 @@ fn use_generic() {
     compare_prints(&string);
 
     compare_types(&array, &vec);
+
+    //关联项
+    let a = 3;
+    let b = 8;
+
+    let container = Container(a, b);
+    println!("{} to {}: {}", &a, &b, container.contains(&a, &b));
+    println!("First num: {}", container.first());
+    println!("Last num: {}", container.last());
+
+    println!("the difference is: {}", difference(&container));
+    
 }
 
 
@@ -128,4 +140,33 @@ fn compare_prints<T: Debug + Display>(t: &T) {
 fn compare_types<T: Debug, U: Debug>(t: &T, u: &U) {
     println!("t: {:?}", t);
     println!("u: {:?}", u);
+}
+
+//关联项
+struct Container(i32, i32);
+
+trait Contains<A, B> {
+    fn contains(&self, _: &A, _: &B) -> bool;
+    fn first(&self) -> i32;
+    fn last(&self) -> i32;
+}
+
+impl Contains<i32, i32> for Container {
+    fn contains(&self, a: &i32, b: &i32) -> bool {
+        (&self.0 == a) && (&self.1 == b)
+    }
+
+    fn first(&self) -> i32 {
+        self.0
+    }
+
+    fn last(&self) -> i32 {
+       self.1 
+    }
+}
+
+//使用where子句
+fn difference<A, B, C>(container: &C) -> i32 where 
+    C: Contains<A, B> {
+    container.last() - container.first()
 }
