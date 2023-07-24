@@ -4,6 +4,7 @@
 /// rust的析构函数通过Drop trait实现，离开作用域时便会调用，无需为每个都实现
 /// ## 所有权
 /// 所有资源只能拥有一个所有者，通过值传递所有权会发生转移，通过引用传递所有权不会转移
+/// 当所有权发生转移时，数据的可变形可能发生改变
 fn main() {
     println!("Hello, world!");
 
@@ -52,6 +53,22 @@ fn owner_ship () {
     
     //释放b
     destroy_box(b);  
+
+    //当所有权发生转移时，数据的可变形可能发生改变
+    let nomut_box = Box::new(8i32);
+
+    println!("{} is not mut box", nomut_box);
+
+    //not change
+    //*nomut_box = 7;
+    
+    let mut mut_box = nomut_box;
+
+    println!("{} is mut box", mut_box);
+
+    *mut_box = 7;
+
+    println!("mut box change after: {}", mut_box);
 
 }
 
