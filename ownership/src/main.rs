@@ -1,3 +1,5 @@
+use std::fmt::{Debug};
+
 /// # 作用域
 /// rall（resource acquistion is initiallization）资源获取即初始化
 /// 任何函数在离开作用域时，都会被调用析构函数释放资源
@@ -5,6 +7,8 @@
 /// ## 所有权
 /// 所有资源只能拥有一个所有者，通过值传递所有权会发生转移，通过引用传递所有权不会转移
 /// 当所有权发生转移时，数据的可变形可能发生改变
+/// 部分移动
+/// 复合变量解构后，可以进行部分变量移动，其他部分保留，移动后不可以整体使用父级变量
 fn main() {
     println!("Hello, world!");
 
@@ -70,6 +74,25 @@ fn owner_ship () {
 
     println!("mut box change after: {}", mut_box);
 
+    //部分移动
+    let person = Person {
+        name: String::from("mark"),
+        age: 21,
+    };
+    
+    println!("person's {:?}", person);
+
+    //name被移走，age被引用
+    let Person { name,ref age } = person;
+
+    println!("The person's age is {}", age);
+
+    println!("The person's name is {}", name);
+
+    //error, person被部分借用，不能完整使用
+    //println!("person's {:?}", person);
+    
+    println!("The person's age from person struct is {}", person.age);
 }
 
 fn destroy_box(b: Box<i32>) {
@@ -78,4 +101,14 @@ fn destroy_box(b: Box<i32>) {
     //b被释放
 }
 
+struct Person {
+    name: String,
+    age: i32,
+}
 
+
+impl Debug for Person {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{} is the {} years old", self.name, self.age)
+    }
+}
