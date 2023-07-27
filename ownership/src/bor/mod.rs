@@ -5,12 +5,15 @@ pub mod loan;
 /// 对象在其作用域中被借用时，后续不能进行销毁操作
 /// 可变引用
 /// 借用者可读可写对象, 不能可变的借用一个不可变对象
+/// ref关键字可以创建对象的引用
 pub fn borrow_test() {
     println!("'borrow test");
 
     use_borrow();
 
     mut_borrow();
+
+    ref_borrow();
 }
 
 // 取得一个box并销毁
@@ -80,4 +83,57 @@ fn mut_borrow() {
 
     //不能可变的借用一个不可变引用
     //borrow_mut_book(&mut book);
+}
+
+fn ref_borrow() {
+    let c = 'C';
+
+    //下面两种写法一致，ref可以创建对象的引用
+    let ref ref_c1 = c;
+    let ref_c2 = &c;
+
+    println!("equal?, {}", *ref_c1 == *ref_c2);
+
+    let point = Point { x: 6, y: 7 };
+
+    //解构结构体时使用ref
+    let _copy_of_x = {
+        //解构结构体
+        let Point {
+            x: ref ref_to_x,
+            y: _,
+        } = point;
+
+        *ref_to_x
+    };
+
+    let mut mut_point = point;
+
+    {
+        //解构结构体
+        let Point {
+            x: _,
+            y: ref mut mut_ref_of_y,
+        } = mut_point;
+        *mut_ref_of_y = 1;
+    }
+
+    println!("mut point is: [{} {}]", mut_point.x, mut_point.y);
+
+    let mut mut_tuple = (Box::new(6u32), 7u32);
+
+    {
+        //解构元组
+        let (_, ref mut last) = mut_tuple;
+
+        *last = 67;
+    }
+
+    println!("tuple is {:?}", mut_tuple);
+}
+
+#[derive(Clone, Copy)]
+struct Point {
+    x: i32,
+    y: i32,
 }
