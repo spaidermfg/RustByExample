@@ -1,4 +1,4 @@
-use std::fmt::{Debug};
+use std::fmt::Debug;
 mod bor;
 /// # 作用域
 /// rall（resource acquistion is initiallization）资源获取即初始化
@@ -18,36 +18,32 @@ fn main() {
     println!("Made a DoDrop.");
 
     owner_ship();
-    
+
     //借用
     bor::borrow_test();
     bor::loan::borrow_demo();
 }
-
 
 fn create_box() {
     //在堆上分配内存
     let _box = Box::new(3i32);
 }
 
-
 struct DoDrop;
 
 impl Drop for DoDrop {
     fn drop(&mut self) {
         println!("DoDrop is being dropped.")
-    }  
+    }
 }
 
-
-fn owner_ship () {
+fn owner_ship() {
     //在栈上分配内存
     let x = 7i32;
 
     //copy
     let y = x;
     println!("x is {}, y is {}", x, y);
-
 
     //在堆上分配内存
     let a = Box::new(6i32);
@@ -58,9 +54,9 @@ fn owner_ship () {
 
     //error
     //println!("a contains: {}", a);
-    
+
     //释放b
-    destroy_box(b);  
+    destroy_box(b);
 
     //当所有权发生转移时，数据的可变形可能发生改变
     let nomut_box = Box::new(8i32);
@@ -69,7 +65,7 @@ fn owner_ship () {
 
     //not change
     //*nomut_box = 7;
-    
+
     let mut mut_box = nomut_box;
 
     println!("{} is mut box", mut_box);
@@ -83,11 +79,11 @@ fn owner_ship () {
         name: String::from("mark"),
         age: 21,
     };
-    
+
     println!("person's {:?}", person);
 
     //name被移走，age被引用
-    let Person { name,ref age } = person;
+    let Person { name, ref age } = person;
 
     println!("The person's age is {}", age);
 
@@ -95,7 +91,7 @@ fn owner_ship () {
 
     //error, person被部分借用，不能完整使用
     //println!("person's {:?}", person);
-    
+
     println!("The person's age from person struct is {}", person.age);
 }
 
@@ -109,7 +105,6 @@ struct Person {
     name: String,
     age: i32,
 }
-
 
 impl Debug for Person {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
