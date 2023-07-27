@@ -1,5 +1,6 @@
 use std::fmt::Debug;
 mod bor;
+mod area;
 /// # 作用域
 /// rall（resource acquistion is initiallization）资源获取即初始化
 /// 任何函数在离开作用域时，都会被调用析构函数释放资源
@@ -14,7 +15,7 @@ fn main() {
 
     create_box();
 
-    let _x = DoDrop;
+    let _x = DoDrop; 
     println!("Made a DoDrop.");
 
     owner_ship();
@@ -22,6 +23,9 @@ fn main() {
     //借用
     bor::borrow_test();
     bor::loan::borrow_demo();
+
+    //作用域
+    area::area_regular();
 }
 
 fn create_box() {
