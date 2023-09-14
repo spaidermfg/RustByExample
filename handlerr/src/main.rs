@@ -41,6 +41,9 @@ fn use_unwrap() {
     };
 
     println!("{:?}", p.work_phone_area_code());
+
+    //--------map
+    use_combinator()
 }
 
 
@@ -83,4 +86,69 @@ fn next_birthday(current_age: Option<u8>) -> Option<String> {
     Some(format!("Next year I will be {}", next_age))
 }
 
+/// 组合算子 combinator
+/// 以模块化的风格来管理控制流
+#[derive(Debug)]
+enum Food {
+    Apple,
+    Carrot,
+    Potato,
+}
+
+struct Peeled(Food);
+struct Chopped(Food);
+#[derive(Debug)]
+struct Cooked(Food);
+
+// 如果是Food，就削皮
+fn peel(food: Option<Food>) -> Option<Peeled> {
+    match food {
+        Some(food) => Some(Peeled(food)),
+        None => None,
+    }
+}
+
+// 如果是削好皮的Food，就切块
+fn chop(peeled: Option<Peeled>) -> Option<Chopped> {
+    match peeled {
+        Some(Peeled(food)) => Some(Chopped(food)),
+        None => None,
+    }
+}
+
+// 如果是切好块的Food，就烹饪
+fn cook(chopped: Option<Chopped>) -> Option<Cooked> {
+    chopped.map(|Chopped(food)| Cooked(food))
+}
+
+// 一条龙
+fn process(food: Option<Food>) -> Option<Cooked> {
+    food.map(|f| Peeled(f))
+        .map(|Peeled(f)| Chopped(f))
+        .map(|Chopped(f)| Cooked(f))
+
+}
+
+// 如果是烹饪好的Food，就恰
+fn eat(food: Option<Cooked>) {
+    match food {
+        Some(food) => println!("Emm, I love {:?}", food),
+        None => println!("Oh no, It wasn't edible.")
+    }
+}
+
+fn use_combinator() {
+    let apple = Some(Food::Apple);
+    let carrot = Some(Food::Carrot);
+    let potato = None;
+
+    let cooked_apple = cook(chop(peel(apple)));
+    let cooked_carrot = cook(chop(peel(carrot)));
+
+    let cooked_potato = process(potato);
+
+    eat(cooked_apple);
+    eat(cooked_carrot);
+    eat(cooked_potato);
+}
 
