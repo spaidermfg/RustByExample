@@ -7,6 +7,7 @@ fn main() {
 
     use_unwrap();
 
+    use_and_then();
 }
 
 fn use_unwrap() {
@@ -150,5 +151,64 @@ fn use_combinator() {
     eat(cooked_apple);
     eat(cooked_carrot);
     eat(cooked_potato);
+}
+
+/// and_then() 使用被Option包裹的值来调用其输入的函数并返回结果
+#[derive(Debug)]
+enum Foods {
+    CordonBleu,
+    Steak,
+    Sushi,
+}
+
+
+#[derive(Debug)]
+enum Day {
+    Monday,
+    Tuesday,
+    Wednesday,
+}
+
+fn have_ingredients(foods: Foods) -> Option<Foods> {
+    match foods {
+        Foods::Sushi => None,
+        _ => Some(foods),
+    }
+}
+
+fn have_recipe(foods: Foods) -> Option<Foods> {
+    match foods {
+        Foods::CordonBleu => None,
+        _ => Some(foods),
+    }
+}
+
+fn cookable_v1(foods: Foods) -> Option<Foods> {
+    match have_ingredients(foods) {
+        None => None,
+        Some(foods) => match have_recipe(foods) {
+            None => None,
+            Some(foods) => Some(foods),
+        }
+    }
+}
+
+fn cookable_v2(foods: Foods) -> Option<Foods> {
+    have_ingredients(foods).and_then(have_recipe)
+}
+
+fn eats(foods: Foods, day: Day) {
+    match cookable_v2(foods) {
+        Some(foods) => println!("Yay! On {:?} we get to eat {:?}", day, foods),
+        None => println!("Oh no!, we don't get to eat on {:?}?", day),
+    }
+}
+
+fn use_and_then() {
+    let (cordon_bleu, steak, sushi) = (Foods::CordonBleu, Foods::Steak, Foods::Sushi);
+
+    eats(cordon_bleu, Day::Monday);
+    eats(steak, Day::Tuesday);
+    eats(sushi, Day::Wednesday);
 }
 
