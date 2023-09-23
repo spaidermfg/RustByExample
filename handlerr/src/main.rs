@@ -1,4 +1,5 @@
 mod who_people;
+mod result;
 
 /// 错误处理
 fn main() {
