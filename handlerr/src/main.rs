@@ -9,6 +9,8 @@ fn main() {
     use_unwrap();
 
     use_and_then();
+
+    result::r#use()
 }
 
 fn use_unwrap() {
