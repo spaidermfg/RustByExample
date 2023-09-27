@@ -4,7 +4,7 @@ use std::num::ParseIntError;
 /// OK<T>  Err<E>
 /// 如果某个Result可能被重用，可以为其取一个别名
 
-type AliiasedResult<T> = Result<T, ParseIntError>;
+type AliasedResult<T> = Result<T, ParseIntError>;
 
 pub fn r#use() {
     println!("---------------------------result");
