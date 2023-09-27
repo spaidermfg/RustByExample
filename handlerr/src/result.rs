@@ -22,7 +22,7 @@ pub fn r#use() {
     print(t);
 }
 
-fn multiply_v1(first_num_str: &str, second_num_str: &str) -> AliiasedResult<i32> {
+fn multiply_v1(first_num_str: &str, second_num_str: &str) -> AliasedResult<i32> {
     match first_num_str.parse::<i32>() {
         Err(e) => Err(e),
         Ok(first_num) => {
@@ -36,14 +36,14 @@ fn multiply_v1(first_num_str: &str, second_num_str: &str) -> AliiasedResult<i32>
     }
 }
 
-fn multiply_v2(first_num_str: &str, second_num_str: &str) -> AliiasedResult<i32> {
+fn multiply_v2(first_num_str: &str, second_num_str: &str) -> AliasedResult<i32> {
      first_num_str.parse::<i32>().and_then(|first_num| {
          second_num_str.parse::<i32>().map(|second_str|
          first_num * second_str)
      })
 }
 
-fn print(result: AliiasedResult<i32>) {
+fn print(result: AliasedResult<i32>) {
     match result {
         Ok(n) => println!("n is {}", n),
         Err(e) => println!("Error: {}", e),
