@@ -1,5 +1,6 @@
 mod who_people;
 mod result;
+mod complex;
 
 /// 错误处理
 fn main() {
@@ -10,7 +11,9 @@ fn main() {
 
     use_and_then();
 
-    result::r#use()
+    result::r#use();
+
+    complex::complex();
 }
 
 fn use_unwrap() {
