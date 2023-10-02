@@ -1,6 +1,6 @@
 use std::error::Error;
 use std::fmt;
-use std::fmt::Formatter;
+use std::fmt::{Display, Formatter};
 
 /// 处理复杂错误类型
 pub fn complex() {
@@ -67,5 +67,4 @@ fn double_first1(vec: Vec<&str>) -> Result<i32> {
     vec.first().ok_or(DoubleError).and_then(|s| {
         s.parse::<i32>().map_err(|_| DoubleError).map(|i| 2 * i)
     })
-
 }

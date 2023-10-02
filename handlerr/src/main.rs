@@ -1,6 +1,7 @@
 mod who_people;
 mod result;
 mod complex;
+mod boxerr;
 
 /// 错误处理
 fn main() {
@@ -14,6 +15,8 @@ fn main() {
     result::r#use();
 
     complex::complex();
+
+    boxerr::box_err();
 }
 
 fn use_unwrap() {
